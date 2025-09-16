@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Приглашение на свадьбу</title>
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      color: #333;
+      background: #c0e0ff; /* Голубой фон по всему сайту */
+      overflow-x: hidden;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Обложка */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end; /* Опускаем текст к низу */
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 12%;
+    }
+
+    .hero img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(70%);
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #fff;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .hero h1.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Приглашение */
+    .invite-text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.3rem;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .invite h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    /* Детали */
+    .details h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    .details p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    /* Календарь в виде полноценной страницы */
+    .calendar-block {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease;
+    }
+
+    .calendar-block.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .calendar-header {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #2a2a2a;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 40px);
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .calendar-grid div {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .calendar-grid div:hover {
+      background: #d0eaff;
+      cursor: pointer;
+    }
+
+    .calendar-grid .highlight {
+      background: #ff6b81;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* Кнопка календаря */
+    .calendar a {
+      display: inline-block;
+      background: #333;
+      color: #fff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      margin-top: 1rem;
+    }
+
+    .calendar a:hover {
+      background: #666;
+    }
+
+    /* Локация */
+    .map h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .map a {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0073e6;
+      text-decoration: none;
+    }
+
+    .map a:hover {
+      text-decoration: underline;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Футер */
+    .footer {
+      background: #333;
+      color: white;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .invite-text { font-size: 1.1rem; }
+      .calendar-grid {
+        grid-template-columns: repeat(7, 35px);
+        gap: 4px;
+      }
+      .calendar-grid div {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Обложка -->
+  <section class="hero">
+    <img src="IMG_6015.JPG" alt="Владислав и Полина">
+    <h1>Владислав & Полина</h1>
+  </section>
+
+  <!-- Текстовое приглашение -->
+  <section class="invite">
+    <h2>Приглашаем вас на нашу свадьбу</h2>
+    <div class="invite-text">
+      Дорогие наши родные и близкие!  
+      Мы счастливы пригласить вас на самый важный день нашей жизни — день нашей свадьбы.  
+      Пусть этот вечер станет праздником любви, тепла и радости для всех нас.  
+      Мы будем счастливы разделить его с вами!  
+    </div>
+  </section>
+
+  <!-- Детали события -->
+  <section class="details">
+    <h2>Детали события</h2>
+    <p><strong>Дата:</strong> 8 августа 2026</p>
+    <p><strong>Время:</strong> 18:00</p>
+    <p><strong>Место:</strong> Ресторан «Небо», Одесса, Украина</p>
+
+    <!-- Календарь как полноценная страница месяца -->
+    <div id="calendar-block" class="calendar-block">
+      <div class="calendar-header">Август 2026</div>
+      <div class="calendar-grid" id="calendar-grid">
+        <!-- Дни будут добавлены скриптом -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Кнопка календаря -->
+  <section class="calendar">
+    <h2>Сохраните дату</h2>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Свадьба+Владислав+и+Полина&dates=20260808T150000Z/20260808T210000Z&details=Свадьба+в+ресторане+Небо+в+Одессе&location=Ресторан+Небо,+Одесса" target="_blank">
+      Добавить в календарь
+    </a>
+  </section>
+
+  <!-- Локация -->
+  <section class="map">
+    <h2>Локация</h2>
+    <p>
+      <a href="https://goo.gl/maps/xp7DzTPr2c4D9eW36" target="_blank">Ресторан «Небо» на карте</a>
+    </p>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800" alt="Фото ресторана">
+      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800" alt="Фото интерьера">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800" alt="Фото зала">
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <div class="footer">
+    С любовью, Владислав и Полина 💍
+  </div>
+
+  <!-- Скрипт для анимации и календаря -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const options = { threshold: 0.2 };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+
+          // Анимация заголовка на обложке
+          if (entry.target.classList.contains("hero")) {
+            entry.target.querySelector("h1").classList.add("visible");
+          }
+
+          // Анимация календаря блока
+          if (entry.target.classList.contains("details")) {
+            document.getElementById("calendar-block").classList.add("visible");
+          }
+        }
+      });
+    }, options);
+
+    sections.forEach(section => observer.observe(section));
+
+    // Генерация календаря месяца
+    const calendarGrid = document.getElementById('calendar-grid');
+    const daysInMonth = 31; // Август
+    for(let i=1; i<=daysInMonth; i++){
+      const dayDiv = document.createElement('div');
+      dayDiv.textContent = i;
+      if(i === 8) dayDiv.classList.add('highlight'); // Выделяем 8 августа
+      calendarGrid.appendChild(dayDiv);
+    }
+  </script>
+</body>
+</html>
